@@ -4,7 +4,7 @@ exports.connectdatabase = async () =>{
     try {
         
         await mongoose.connect(process.env.MONGOURL)
-        console.log("database is connected ");
+        console.log("Database is connected ");
         
     } catch (error) {
         console.log(error.message);

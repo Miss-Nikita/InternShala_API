@@ -1,11 +1,15 @@
 const express = require("express");
-const router = express.Router()
+const router = express.Router();
 
-const { homepage, studentsignup, studentsignin, studentsignout } = require("../controllers/indexController");
+const {
+  homepage,
+  studentsignup,
+  studentsignin,
+  studentsignout,
+} = require("../controllers/indexController");
 
 // Get /
-router.get("/", homepage)
-
+router.get("/", homepage);
 
 // Post  /Student/signup
 router.post("/student/signup", studentsignup);
@@ -13,12 +17,7 @@ router.post("/student/signup", studentsignup);
 // Post  /Student/signin
 router.post("/student/signin", studentsignin);
 
-
-// POst  /Student/signout
+// Post  /Student/signout
 router.post("/student/signout", studentsignout);
-
-
-
-
 
 module.exports = router;
