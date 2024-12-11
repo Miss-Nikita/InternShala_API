@@ -2,7 +2,7 @@ const { catchAsyncErrors } = require("../middleware/catchAsyncErrors")
 const Student = require("../models/studentModel")
 
 exports.homepage = catchAsyncErrors(async (req,res,next) =>{
-    res.json({message: "Homepage"})
+    res.json({message: "Secure Homepage!"})
 })
 
 exports.studentsignup = catchAsyncErrors(async(req,res,next) =>{
@@ -17,7 +17,9 @@ exports.studentsignin = catchAsyncErrors(async(req,res,next) =>{
      if (!student) return next(new ErrorHandler("User not found with is email Address ", 400)
     )
 
-    const isMatch = student.comp
+    const isMatch = student.comparepassword(req.body.password);
+    if (!isMatch) return next(new ErrorHandler("Wrong Credientails", 500));
+    
      res.json(student);
 });
 
