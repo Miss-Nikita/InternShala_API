@@ -1,23 +1,16 @@
 const express = require("express");
+const { homepage, studentsignup, studentsignin } = require("../controllers/indexController");
 const router = express.Router();
 
-const {
-  homepage,
-  studentsignup,
-  studentsignin,
-  studentsignout,
-} = require("../controllers/indexController");
 
-// Get /
-router.get("/", homepage);
 
-// Post  /Student/signup
-router.post("/student/signup", studentsignup);
+// GET/
+router.get("/",homepage)
 
-// Post  /Student/signin
-router.post("/student/signin", studentsignin);
+// POST   /student/signup
+router.post("/student/signup",studentsignup)
 
-// Post  /Student/signout
-router.post("/student/signout", studentsignout);
+// POST   /student/signin
+router.post("/student/signin",studentsignin)
 
 module.exports = router;

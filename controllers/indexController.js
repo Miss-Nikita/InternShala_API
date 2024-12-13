@@ -1,31 +1,13 @@
-const { catchAsyncErrors } = require("../middleware/catchAsyncErrors")
-const Student = require("../models/studentModel")
-
-exports.homepage = catchAsyncErrors(async (req,res,next) =>{
-    res.json({message: "Secure Homepage!"})
-})
-
-exports.studentsignup = catchAsyncErrors(async(req,res,next) =>{
-    const student = await new Student(req.body).save();
-    res.status(201).json(student)
-});
+const { catchAsyncErrors } = require("../middleware/catchAsyncErrors");
 
 
-exports.studentsignin = catchAsyncErrors(async(req,res,next) =>{
-     const student = await Student.findOne({email: req.body.email}).select("+password").exec();
-
-     if (!student) return next(new ErrorHandler("User not found with is email Address ", 400)
-    )
-
-    const isMatch = student.comparepassword(req.body.password);
-    if (!isMatch) return next(new ErrorHandler("Wrong Credientails", 500));
-    
-     res.json(student);
-});
-
-
-
-exports.studentsignout = catchAsyncErrors(async(req,res,next) =>{
-    
-});
-
+exports.homepage = catchAsyncErrors(async (req, res, next) => {
+    console.log("Homepage function executed");
+    res.json({ message: "homepage" });
+  });
+  
+  exports.studentsignup = catchAsyncErrors(async (req, res, next) => {
+    console.log("Student signup function executed");
+    res.json(req.body);
+  });
+  
