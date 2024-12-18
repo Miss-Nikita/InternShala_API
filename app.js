@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 
 
-// db connection
+//  db connection
 require("./models/database").connectdatabase();
 
 
@@ -27,7 +27,7 @@ app.use(session({
   secret: process.env.EXPRESS_SESSION_SECRET
 }))
 
-app.use(cookieparser());
+// app.use(cookieparser());
 
 
 // router

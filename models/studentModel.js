@@ -17,21 +17,21 @@ const studentModel = new mongoose.Schema(
       type: String,
       select: false,
       maxlength: [15, "Password should not exced more then 15 Characters"],
-      minlength: [3, "Password should have atlest 6 Charectar"],
+      minlength: [6, "Password should have atlest 6 Charectar"],
       // match: [/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,1024}$/]
     },
   },
   { timestamps: true }
 );
 
-// studentModel.pre("save", function () {
-//   if (!this.isModified("password")) {
-//     return;
-//   }
+studentModel.pre("save", function () {
+  if (!this.isModified("password")) {
+    return;
+  }
 
-//   let salt = bcrypt.genSaltSync(10);
-//   this.password = bcrypt.hashSync(this.password, salt);
-// });
+  let salt = bcrypt.genSaltSync(10);
+  this.password = bcrypt.hashSync(this.password, salt);
+});
 
 // studentModel.methods.comparepassword = function (password) {
 //   return bcrypt.compareSync(password, this.password);
