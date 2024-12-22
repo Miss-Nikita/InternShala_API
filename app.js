@@ -27,7 +27,7 @@ app.use(session({
   secret: process.env.EXPRESS_SESSION_SECRET
 }))
 
-// app.use(cookieparser());
+app.use(cookieparser());
 
 
 // router
