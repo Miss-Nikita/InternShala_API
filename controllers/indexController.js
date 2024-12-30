@@ -1,6 +1,7 @@
 const { catchAsyncErrors } = require("../middleware/catchAsyncErrors");
 const Student = require("../models/studentModel");
 const ErrorHandler = require("../utils/ErrorHandling");
+const { sendmail } = require("../utils/nodemailer");
 const { sendtoken } = require("../utils/SendToken");
 
 exports.homepage = catchAsyncErrors(async (req, res, next) => {
@@ -47,5 +48,25 @@ exports.studentsendmail = catchAsyncErrors(async (req, res, next) => {
       new ErrorHandler("User not found with this email address", 404)
     );
 
-  res.json({ student });
+  const url = `${req.protocol}://${req.get("host")}/student/forget-link/${
+    student._id
+  }`;
+
+  sendmail(req, res, next, url);
+
+  res.json({ student, url });
 });
+
+
+
+exports.studentforgetlink = catchAsyncErrors(async(req,res,next) =>{
+  const student = await Student.findById(req.params.id).exec();
+
+  if(!student) return next(new ErrorHandler("User not found with this email address ",404))
+
+    student.password = req.body.password;
+    await student.save();
+    res.status(200).json({
+      message :"Password has been successsfully Changed "
+    })
+})
