@@ -53,20 +53,51 @@ exports.studentsendmail = catchAsyncErrors(async (req, res, next) => {
   }`;
 
   sendmail(req, res, next, url);
-
+  student.resetPasswordToken = "1";
+  await student.save();
   res.json({ student, url });
 });
 
-
-
-exports.studentforgetlink = catchAsyncErrors(async(req,res,next) =>{
+exports.studentforgetlink = catchAsyncErrors(async (req, res, next) => {
   const student = await Student.findById(req.params.id).exec();
 
-  if(!student) return next(new ErrorHandler("User not found with this email address ",404))
+  if (!student)
+    return next(
+      new ErrorHandler("User not found with this email address ", 404)
+    );
 
+  if (student.resetPasswordToken == "1") {
+    student.resetPasswordToken = "0";
     student.password = req.body.password;
-    await student.save();
-    res.status(200).json({
-      message :"Password has been successsfully Changed "
-    })
-})
+  } else {
+    return next(
+      new ErrorHandler("Invalid Reset Password Link! Please Try again", 404)
+    );
+  }
+  await student.save();
+
+  res.status(200).json({
+    message: "Password has been successsfully Changed ",
+  });
+});
+
+exports.studentresetpassword = catchAsyncErrors(async (req, res, next) => {
+  const student = await Student.findById(req.id).exec();
+
+  student.password = req.body.password;
+  await student.save();
+  sendtoken(student, 200, res);
+});
+
+exports.studentupdate = catchAsyncErrors(async (req, res, next) => {
+  const student = await Student.findByIdAndUpdate(
+    req.params.id,
+    req.body
+  ).exec();
+
+  res.status(200).json({
+    success: true,
+    message: "Student Updated Successfully!",
+    student,
+  });
+});
