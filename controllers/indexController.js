@@ -90,7 +90,7 @@ exports.studentresetpassword = catchAsyncErrors(async (req, res, next) => {
 });
 
 exports.studentupdate = catchAsyncErrors(async (req, res, next) => {
-  const student = await Student.findByIdAndUpdate(
+ await Student.findByIdAndUpdate(
     req.params.id,
     req.body
   ).exec();
@@ -98,6 +98,10 @@ exports.studentupdate = catchAsyncErrors(async (req, res, next) => {
   res.status(200).json({
     success: true,
     message: "Student Updated Successfully!",
-    student,
-  });
+      });
 });
+
+
+exports.studentavatar = catchAsyncErrors(async(req,res,next) =>{
+  res.json({file:req.files})
+})
