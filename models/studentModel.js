@@ -46,16 +46,24 @@ const studentModel = new mongoose.Schema(
       type: String,
       default: "0",
     },
-    avatar: String,
-    // avatar: {
-    //   type:String,
-    //   default:{
-    //     fileId:"",
-    //     url:"",
-    //   }
-    // }
-
-
+    // avatar: String,
+    avatar: {
+      type: Object,
+      default: {
+        fileId: "",
+        url: "https://plus.unsplash.com/premium_photo-1673108852149-85f46a4dee4b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8",
+      },
+    },
+    resume:{
+      education:[],
+      jobs:[],
+      interships:[],
+      responsibilities:[],
+      courses:[],
+      projects:[],
+      skills:[],
+      accomplishments:[],
+    }
   },
   { timestamps: true }
 );
