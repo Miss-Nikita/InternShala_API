@@ -231,3 +231,35 @@ exports.deleteskil = catchAsyncErrors(async (req, res, next) => {
   await student.save();
   res.json({ message: "Skills Deleted!" });
 });
+
+// --------------------------- accomplishments ----------------------------
+
+exports.addacomp = catchAsyncErrors(async (req, res, next) => {
+  const student = await Student.findById(req.id).exec();
+  student.resume.accomplishments.push({ ...req.body, id: uuidv4() });
+  await student.save();
+  res.json({ message: "Accomplishments Added!" });
+});
+
+exports.editacomp = catchAsyncErrors(async (req, res, next) => {
+  const student = await Student.findById(req.id).exec();
+  const acompIndex = student.resume.accomplishments.findIndex(
+    (i) => i.id === req.params.acompid
+  );
+  student.resume.accomplishments[acompIndex] = {
+    ...student.resume.accomplishments[acompIndex],
+    ...req.body,
+  };
+  await student.save();
+  res.json({ message: "Accomplishment Updated!" });
+});
+
+exports.deleteacomp = catchAsyncErrors(async (req, res, next) => {
+  const student = await Student.findById(req.id).exec();
+  const filteredacomp = student.resume.accomplishments.filter(
+    (i) => i.id !== req.params.acompid
+  );
+  student.resume.accomplishments = filteredacomp;
+  await student.save();
+  res.json({ message: "Accomplishment Deleted!" });
+});

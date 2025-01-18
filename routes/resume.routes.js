@@ -24,6 +24,9 @@ const {
   addskil,
   editskil,
   deleteskil,
+  addacomp,
+  editacomp,
+  deleteacomp,
 } = require("../controllers/resumeController.js");
 const { isAuthenticated } = require("../middleware/auth.js");
 
@@ -56,7 +59,6 @@ router.post("/delete-job/:jobid", isAuthenticated, deletejob);
 // POST
 router.post("/add-intern", isAuthenticated, addintern);
 
-
 // POST
 router.post("/edit-intern/:internid", isAuthenticated, editintern);
 
@@ -71,7 +73,6 @@ router.post("/edit-resp/:respid", isAuthenticated, editresp);
 
 // POST
 router.post("/delete-resp/:respid", isAuthenticated, deleteresp);
-
 
 // ----------------------------Courses--------------------
 // POST
@@ -102,6 +103,14 @@ router.post("/edit-skil/:skilid", isAuthenticated, editskil);
 
 // POST
 router.post("/delete-skil/:skilid", isAuthenticated, deleteskil);
+// ----------------------------accomplishments--------------------
+// POST
+router.post("/add-acomp", isAuthenticated, addacomp);
 
+// POST
+router.post("/edit-acomp/:acompid", isAuthenticated, editacomp);
+
+// POST
+router.post("/delete-acomp/:acompid", isAuthenticated, deleteacomp);
 
 module.exports = router;
