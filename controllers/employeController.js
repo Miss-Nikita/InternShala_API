@@ -1,5 +1,5 @@
 const { catchAsyncErrors } = require("../middleware/catchAsyncErrors");
-const Student = require("../models/studentModel");
+const Employe = require("../models/employeModel");
 const ErrorHandler = require("../utils/ErrorHandling");
 const { sendmail } = require("../utils/nodemailer");
 const { sendtoken } = require("../utils/SendToken");
