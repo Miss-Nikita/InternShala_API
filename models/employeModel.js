@@ -14,12 +14,12 @@ const employeModel = new mongoose.Schema(
       required: [true, "Last Name is required"],
       minlength: [4, "Last Name should be atleast 4 character long"],
     },
-    contact: {
-      type: String,
-      required: [true, "Contact is required"],
-      minlength: [10, "Contact should be atleast 10 character long"],
-      maxlength: [10, "Contact must not exceed 10 character "],
-    },
+    // contact: {
+    //   type: String,
+    //   required: [true, "Contact is required"],
+    //   minlength: [10, "Contact should be atleast 10 character long"],
+    //   maxlength: [10, "Contact must not exceed 10 character "],
+    // },
     city: {
       type: String,
       required: [true, "City Name is required"],
