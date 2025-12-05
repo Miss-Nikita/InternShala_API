@@ -1,7 +1,15 @@
 const express = require("express");
 const {
   homepage,
-
+  currentUser,
+  employesignup,
+  employesignin,
+  employesignout,
+  employesendmail,
+  employeforgetlink,
+  employeresetpassword,
+  employeupdate,
+  employeavatar,
 } = require("../controllers/employeController");
 const { isAuthenticated } = require("../middleware/auth");
 const router = express.Router();
